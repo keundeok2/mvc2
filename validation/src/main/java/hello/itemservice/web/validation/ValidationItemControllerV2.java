@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -197,17 +198,29 @@ public class ValidationItemControllerV2 {
     @PostMapping("/add")
     public String addItemV4(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
+        // 검증에 실패하면 다시 입력 폼으로
+        if (bindingResult.hasErrors()) {
+            log.info("bindingResult = {}", bindingResult);
+            return "validation/v2/addForm";
+        }
+
+
         // BindingResult는 target을 이미 알고 있음 (현재 케이스는 Item) addError의 objectName(target)을 이미 알고있다는 것임
         // 축약된 오류코드 => bindingResult의 addError() 대신 rejectValue(), reject()를 사용하여 objectName 자동으로 설정
         log.info("objectName = {}", bindingResult.getObjectName());
         log.info("target = {}", bindingResult.getTarget());
 
+
         // 검증 로직
         if (!StringUtils.hasText(item.getItemName())) {
             // rejectValue의 errorCode 규칙 -> required.item.itemName에서 제일 앞 단어만 입력 ( required.item(target).itemName(field) )
             // 자세한 내용은 MessageCodesResolver 이해 (이후 강의)
+            // fieldType은 param으로 넣지 않아도 해당 field의 타입으로 자동 등록되는 듯
             bindingResult.rejectValue("itemName", "required");
         }
+        // 위의 검증 로직을 간편히 할 수 있는 utils
+        //  ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "itemName", "required");
+
 
         if(item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
             bindingResult.rejectValue("price", "range", new Object[]{1000, 1000000}, null);
@@ -225,22 +238,13 @@ public class ValidationItemControllerV2 {
             }
         }
 
-        // 검증에 실패하면 다시 입력 폼으로
-        if (bindingResult.hasErrors()) {
-            log.info("bindingResult = {}", bindingResult);
-            return "validation/v2/addForm";
-        }
-
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/validation/v2/items/{itemId}";
     }
 
-    /*
-    - 오류메시지 설계
 
-     */
 
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
