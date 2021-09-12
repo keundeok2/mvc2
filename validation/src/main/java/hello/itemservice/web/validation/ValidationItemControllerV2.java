@@ -157,7 +157,7 @@ public class ValidationItemControllerV2 {
     public String addItemV3(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
         /*
-         errormessage 관리: FieldError의 parameter codes, arguments를 통해서 errormessage를 찾아올 수 있음
+         errormessage 관리: FieldError의 parameter codes, arguments를 통해서 errors.properties에서 errormessage를 찾아올 수 있음
          */
 
         // 검증 로직
@@ -171,7 +171,6 @@ public class ValidationItemControllerV2 {
 
         if ( item.getQuantity() == null || item.getQuantity() > 9999) {
             bindingResult.addError(new FieldError("item", "quantity", item.getQuantity(), false, new String[]{"max.item.quantity"}, new Object[]{9999}, null));
-            bindingResult.rejectValue("quantity", "max", new Object[]{9999}, null);
         }
 
         // 특정 필드가 아닌 복합 룰 검증
@@ -238,6 +237,10 @@ public class ValidationItemControllerV2 {
         return "redirect:/validation/v2/items/{itemId}";
     }
 
+    /*
+    - 오류메시지 설계
+
+     */
 
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
