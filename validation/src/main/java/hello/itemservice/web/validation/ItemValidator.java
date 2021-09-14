@@ -23,6 +23,7 @@ public class ItemValidator implements Validator {
         Item item = (Item) target;
 
         // 검증 로직
+        // 추후 Bean Validation을 사용하면 아래 검증 로직 모두 삭제
         if (!StringUtils.hasText(item.getItemName())) {
             errors.rejectValue("itemName", "required");
         }
