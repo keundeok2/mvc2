@@ -2,12 +2,15 @@ package hello.itemservice.domain.item;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.ScriptAssert;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
+//@ScriptAssert(lang = "javascript", script = "_this.price * _this.quantity >= 10000", message = "총합이 10000원 넘게 넣어주세요")
+// 서로 다른 객체의 필드를 조합할 경우 사용하기 번거로움. 차라리 Object Error만 직접 검증하는 식으로 가는 것이 좋음
 public class Item {
 
 

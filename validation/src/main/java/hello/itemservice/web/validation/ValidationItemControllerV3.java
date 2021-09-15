@@ -59,10 +59,21 @@ public class ValidationItemControllerV3 {
         -- 검증 순서
         1. @ModelAttribute Bindding
             - 성공하면 다음으로
-            - 실패하면 typeMismatch로 FieldError 추가 -> erorrs.messages의 typeMismatch 에러메시지 출력
+            - 실패하면 typeMismatch로 FieldError 추가 -> erorrs.properties의 typeMismatch 에러메시지 출력
         2. Validator 적용
         Binding에 성공한 Field만 Validator 적용
+
+        -- 에러 코드
+        애너테이션의 이름으로 오류 코드가 등록된다. ex) NotNull.item.itemName
+        typeMismatch와 유사함
          */
+
+        if (item.getPrice() != null && item.getQuantity() != null) {
+            int resultPrice = item.getPrice() * item.getQuantity();
+            if (resultPrice < 10000) {
+                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+            }
+        }
 
         // 검증에 실패하면 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
