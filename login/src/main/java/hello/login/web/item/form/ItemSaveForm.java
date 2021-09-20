@@ -1,7 +1,5 @@
-package hello.itemservice.web.validation.form;
+package hello.login.web.item.form;
 
-import hello.itemservice.domain.item.SaveCheck;
-import hello.itemservice.domain.item.UpdateCheck;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
@@ -11,11 +9,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class ItemSaveForm {
-
-    /*
-    검증 Annotation 모음
-    https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html_single/#validator-defineconstraints-spec
-     */
 
     @NotBlank
     private String itemName;
@@ -27,4 +20,5 @@ public class ItemSaveForm {
     @NotNull
     @Max(value = 9999)
     private Integer quantity;
+
 }
