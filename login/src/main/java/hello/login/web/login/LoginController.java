@@ -46,6 +46,18 @@ public class LoginController {
         Cookie cookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
         response.addCookie(cookie);
 
+        /*
+            - 쿠키의 보안 문제
+            1. 브라우저에서 쿠키의 값을 임의로 변경하여 서버로 전송할 수 있음
+            2. 쿠키는 브라우저에 저장되기때문에 쿠키에 보관된 정보가 탈취될 수 있음
+            - 대안
+            1. 사용자 별 예츠 불가능한 토큰을 노출시키고, 서버에서 토큰과 사용자ID를 매핑하여 사용
+            2. 예측불가능한 값(토큰)을 쿠키에 담아야한다.
+            3. 토큰의 만료시간을 지정해야함
+
+            => Session 사용하여 해결
+         */
+
         return "redirect:/";
 
     }
