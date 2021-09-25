@@ -18,6 +18,7 @@ public class SessionInfoController {
         if (session == null) {
             return "세션이 없읍니다";
         }
+
         // 세션 데이터 출력
         session.getAttributeNames().asIterator()
                 .forEachRemaining(name -> log.info("session name: {}, value: {}", name, session.getAttribute(name)));
