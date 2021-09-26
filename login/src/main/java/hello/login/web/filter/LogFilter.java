@@ -11,6 +11,8 @@ import java.util.UUID;
 public class LogFilter implements Filter {
 
     /*
+            - 서블릿 필
+
         웹 관련 공통된 관심사가 있을 경우 서블릿 필터 또는 스프링 인터셉터를 사용한다.
         AOP를 사용할 수도 있지만 필터와 인터셉터는 HttpServletRequest를 지원하기 때문에 사용하기 더 좋음.
 
@@ -24,6 +26,7 @@ public class LogFilter implements Filter {
         HTTP 요청 -> WAS -> 필터(적절하지 않은 요청이라 판단, 서블릿 호출X) //비 로그인 사용자
 
         - 필터체인으로 여러 필터를 등록할 수 있음
+
      */
 
     @Override
