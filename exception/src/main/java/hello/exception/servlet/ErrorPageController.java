@@ -51,6 +51,21 @@ public class ErrorPageController {
         log.info("ERROR_SERVLET_NAME: {}", request.getAttribute(ERROR_SERVLET_NAME));
         log.info("ERROR_STATUS_CODE: {}", request.getAttribute(ERROR_STATUS_CODE));
         log.info("dispatchType={}", request.getDispatcherType()); // 중요해 이후 강의에서 설명
+        /*
+            - 에러가 발생했을 때 다시 필터와 인터셉터를 거칠 필요가 없을 때?
+        dispatchType -> http 요청이 WAS 외부에서 발생한 것인지 내부에서 발생한 것인지 판별할 수 있음
+        에러 페이지에서: dispatchType = ERROR
+        클라이언트에서: dispatchType = REQUEST
+
+            - DispatchType
+        REQUEST: 클라이언트 요청
+        ERROR: 오류 요청
+        FORWARD: 서블릿에서 다른 서블릿이나 JSP를 호출할 때
+        INCLUDE: 서블릿에서 다른 서블릿이나 JSP의 결과를 포함할 때
+        ASYNC: 서블릿 비동기 호출
+         */
+
+
     }
 
 }
