@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ServletExceptionController {
 
     /*
-      - Java 직접 실행의 경
+      - Java 직접 실행의 경우
     - Java의 main method 직접실행 -> main Thread 실행됨
     - 프로그램 실행 도중 main 메서드까지 예외가 던져지면 예외 정보를 남기고 해당 쓰레드는 종료됨
 
@@ -39,9 +39,19 @@ public class ServletExceptionController {
 
     */
 
+    /*
+        - 스프링 부트는 기본으로 /error 오류페이지 경로로 설정한다.
+          BasicErrorController를 에러컨트롤러로 제공한다.
+          BasicErrorController가 제공하는 룰과 우선순위를 따라서 오류페이지 화면만 등록하면 된다.
+     */
+
     @GetMapping("/error-404")
     public void error404(HttpServletResponse response) throws Exception{
         response.sendError(404, "404오류!");
+    }
+    @GetMapping("/error-400")
+    public void error400(HttpServletResponse response) throws Exception{
+        response.sendError(400, "400오류!");
     }
 
     @GetMapping("/error-500")
