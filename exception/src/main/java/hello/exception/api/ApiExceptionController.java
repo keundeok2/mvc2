@@ -23,6 +23,19 @@ public class ApiExceptionController {
     }
 
 
+    /*
+        - 스프링부트 기본 에러컨트롤러 BasicErrorController를 사용
+
+          produce에 따른 메서드가 정의되어있음
+          errorHtml(): Accept 헤더 값이 text/html 인 경우 ModelAndView 반환
+          error(): 그 외의 경우 HttpBody에 JSON 데이터 반환
+
+          BasicErrorController를 확장하여 JSON 데이터의 내용을 변경할 수도 있지만, 실제로는 사용X
+          대신 @ExceptionHandler 사용한다
+
+     */
+
+
 
     @Data
     @AllArgsConstructor
