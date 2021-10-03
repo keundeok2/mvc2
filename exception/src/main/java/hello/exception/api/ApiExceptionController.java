@@ -17,6 +17,8 @@ public class ApiExceptionController {
         if (id.equals("ex")) {
             throw new RuntimeException("잘못된 사용자");
             // JSON이 아닌 미리 설정되어있는 오류페이지가 반환된다.
+        } else if (id.equals("bad")) {
+            throw new IllegalArgumentException("잘못된 입력 값");
         }
 
         return new MemberDto(id, "hello " + id );
@@ -34,7 +36,6 @@ public class ApiExceptionController {
           대신 @ExceptionHandler 사용한다
 
      */
-
 
 
     @Data
