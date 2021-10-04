@@ -14,6 +14,8 @@ public class MyHandlerExceptionResolver implements HandlerExceptionResolver {
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
+        log.info("resolver ex", ex);
+
         try {
 
 
