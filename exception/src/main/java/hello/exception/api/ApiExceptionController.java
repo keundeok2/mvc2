@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -58,6 +59,17 @@ public class ApiExceptionController {
     public String responseStatusEx2() {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "error.bad", new IllegalArgumentException());
     }
+
+    /**
+     * DefaultHandlerExceptionResolver: 스프링 내부 예외가 처리되어있는 resolver
+     * 아래의 예는 RequestParam이 문자열로 들어와 TypeMismatchException이 발생했을 때
+     * WAS까지 예외를 전달하지 않고, 400 bad request로 변환한다
+     */
+    @GetMapping("/api/default-handler-ex")
+    public String defaultException(@RequestParam Integer data) {
+        return "ok";
+    }
+
 
     @Data
     @AllArgsConstructor
