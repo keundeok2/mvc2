@@ -24,6 +24,7 @@ public class ApiExceptionV2Controller {
      * 컨트롤러 메서드와 매우 유사함. 참고)
      * https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-ann-exceptionhandler-args
      */
+    /*
     @ResponseStatus(HttpStatus.BAD_REQUEST) // HttpStatus도 변경하고 싶으면 추가
     @ExceptionHandler(IllegalArgumentException.class)
     public ErrorResult illegalExHandler(IllegalArgumentException e) {
@@ -44,6 +45,7 @@ public class ApiExceptionV2Controller {
         log.error("[exceptinoHandler] ex", e);
         return new ErrorResult("EX", "내부 오류");
     }
+     */
 
 
     @GetMapping("/api2/members/{id}")
