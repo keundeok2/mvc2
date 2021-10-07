@@ -6,11 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -30,7 +30,7 @@ public class ApiExceptionController {
             throw new UserException("사용자 오류");
         }
 
-        return new MemberDto(id, "hello " + id );
+        return new MemberDto(id, "hello" + id );
     }
 
 
@@ -67,9 +67,10 @@ public class ApiExceptionController {
      */
     @GetMapping("/api/default-handler-ex")
     public String defaultException(@RequestParam Integer data) {
+        log.info("defaultException()");
+
         return "ok";
     }
-
 
     @Data
     @AllArgsConstructor
