@@ -1,5 +1,6 @@
 package hello.typeconverter.controller;
 
+import hello.typeconverter.type.IpPort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +33,17 @@ public class HelloController {
          @ModelAttribute, @PathVariable도 마찬가지로 적용된다
 
          - 개발자가 직접 타입 컨버터 확장 가능. Converter 인터페이스를 구현해서 등록
+         */
+    }
+
+    @GetMapping("/ip-port")
+    public String ipPort(@RequestParam IpPort ipPort) {
+        System.out.println("ipPort IP = " + ipPort.getIp());
+        System.out.println("ipPort port = " + ipPort.getPort());
+        return "ok";
+
+        /*
+            -@RequestParam을 처리하는 ArgumentResolver에서 ConversionService를 사용해서 타입을 변환한다.
          */
     }
 
