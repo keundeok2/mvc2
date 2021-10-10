@@ -28,4 +28,10 @@ public class MyNumberFormatter implements Formatter<Number> {
         log.info("object={}, locale={}", object, locale);
         return NumberFormat.getInstance(locale).format(object);
     }
+
+    /*
+    컨버전 서비스에는 컨버터만 등록할 수 있고, 포맷터는 등록할 수 없지만, 포맷터를 지원하는 컨버전 서비스를 사용하면 됨.
+    FormattingConversionService: 포맷터를 지원하는 컨버전 서비스
+
+     */
 }
