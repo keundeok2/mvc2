@@ -45,6 +45,11 @@ public class HelloController {
         /*
             -@RequestParam을 처리하는 ArgumentResolver에서 ConversionService를 사용해서 타입을 변환한다.
          */
+
+        /*
+        @NumberFormat: 숫자 관련 형식을 지정하는 포맷터를 사용.
+        @DateTimeFormat: 날짜 간련 형식을 지정하는 포맷터를 사용.
+         */
     }
 
 }
