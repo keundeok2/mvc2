@@ -4,9 +4,15 @@ import hello.typeconverter.type.IpPort;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+/*
+    - HttpMessageConverter에는 컨버전 서비스가 적용되지 않는다.
+    JSON을 객체로 변환하거나 객체를 JSON으로 변환할 때에는 HttpMessageConverter를 사용하지 않는다.
+    해당 라이브러리가 제공하는 설정을 변경해야함
+
+    컨버전 서비스는 @RequestParam, @ModelAttribute, @PathVariable, 뷰 템플릿에서 사용할 수 있음
+ */
 
 @Controller
 public class ConverterController {
@@ -34,7 +40,6 @@ public class ConverterController {
         model.addAttribute("ipPort", ipPort);
         return "converter-view";
     }
-
 
     @Data
     static class Form {
