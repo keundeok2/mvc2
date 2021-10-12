@@ -17,6 +17,20 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ConverterController {
 
+    @GetMapping("/test")
+    @ResponseBody
+    public String test(@RequestParam String hello) {
+//        System.out.println("body: " + body);
+        System.out.println("hello: " + hello);
+        return "ok";
+    }
+
+    @Data
+    static class Body {
+        private String name;
+        private int age;
+    }
+
     @GetMapping("/converter-view")
     public String converterView(Model model) {
         model.addAttribute("number", 10000);
